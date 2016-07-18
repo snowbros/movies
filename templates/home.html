@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome.min.css">
+</head>
+<body>
+    <div style="min-height: 100vh;background: #ECF0F1;">
+        <div class="jumbotron">
+        <div class="container text-center">
+            <h1 class="text-center"><i class="fa fa-search"></i> Search movie</h1>
+            <p class="text-center">Search for your favorite movie and get more info about it </p>
+            <form method="POST" action="/">
+            {{ form.hidden_tag() }}
+            <div class="form-group {{ form.name.errors and 'has-error' or 'has-success'}}">
+                {{ form.name(size=50, **{'class': 'form-control', 'id': 'Moviesearch', 'required':'true'}) }}
+                                {% if form.name.errors %}
+                    <span class="help-block">{{ form.name.errors[0] }} </span>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary"> Search Movie Now <i class="fa fa-arrow-right"> </i></button>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome.min.css">
+</head>
+<body>
+    {% if result.backdrop_path %}
+    <div style="min-height: 100%;background: url('http://image.tmdb.org/t/p/w500{{result.backdrop_path}}');background-size: cover;position: absolute;    width: 100%;">
+    </div>
+    {% endif %}
+    <div style="min-height: 100vh;background-color: rgba(2,2,2,0.5);position: relative;">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"> <i class="fa fa-film"> </i> Movie Search</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/"> <i class="fa fa-home"> </i> Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        {% if not result %}
+        <div class="jumbotron">
+            <div class="container text-center">
+                <h1 class="text-center">No movie found</h1>
+                <p class="text-center">Search again </p>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="container" style="padding-top: 20px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="http://image.tmdb.org/t/p/w300/{{result.poster_path}}" class="img img-responsive thumbnail" style="border:1px solid #B5B5B5;margin: 0px auto;max-height: 500px;"/>
+                </div>
+                <div class="col-md-8" style="color:white;">
+                    <div class="col-md-12">
+                    <h2 style="colr:white;">{{ result.title }}</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 10px;">
+                            {% if result.genres %}
+                            <strong> Tags: </strong>
+                            {% for tag in result.genres %}
+                                <span class="label label-success"> {{ tag.name }} </span> &nbsp;
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" style="margin-bottom: 10px;">
+                        <strong><i class="fa fa-calendar"> </i> Release Date </strong> {{result.release_date}}
+                    </div>
+                    <div class="col-md-2" style="margin-bottom: 10px;">
+                    <strong><i class="fa fa-star"> </i> Rating </strong> {{result.vote_average}}
+                    </div>
+                    <div class="col-md-6" style="white-space: nowrap;margin-bottom: 10px;">
+                    <strong><i class="fa fa-globe"> </i> </strong> <a href="{{result.homepage}}" target="new">{{result.homepage}}</a>
+                    </div>
+                    <div class="col-md-12">
+                        {{ result.overview }}
+                    </div>
+                    <div class="col-md-6 text-center" style="font-size: 20px;margin-top: 20px;">
+                    <strong > Budget </strong> $ {{result.budget}}
+                    </div>
+                    <div class="col-md-6 text-center" style="font-size: 20px;margin-top: 20px;">
+                    <strong > Revenue </strong> $ {{result.revenue}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</body>
+</html>
